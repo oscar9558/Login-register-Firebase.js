@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Uvolco</title>
+    <!-- Bootstrap CSS Formater -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <!-- Firebase Auth Service -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
+</head>
+
+<body>
+    <div class="m-3">
+        <nav class="navbar navbar-dark bg-uvolco">
+            <a class="navbar-brand text-light"><img src="UvolcoLogo-09.png" alt="logo" width="120px"></a>
+            <div class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+                    Iniciar sesión
+                </button>
+            </div>
+        </nav>
+    </div>
+    <section class="s-3">
+        <div class="col text-center s-1">
+            <h3 class="text-uppercase">Registro de Usuarios</h3>
+            <input class="s-2" id="name" type="text" placeholder="Ingresa tu Nombre" />
+            <input class="s-2" id="email" type="email" placeholder="Ingresa Email" />
+            <input class="s-2" id="contrasena" type="password" placeholder="Ingresa Contraseña" />
+            <br />
+            <button class="btn btn-danger" onclick="registrar()">Registrarse</button>
+        </div>
+
+        <div class="col text-center s-1">
+            <h3 class="text-uppercase">Ingreso de Usuarios</h3>
+            <input class="s-2" id="email2" type="email" placeholder="Ingresa Email" />
+            <input class="s-2" id="contrasena2" type="password" placeholder="Ingresa Contraseña" />
+            <br />
+            <button class="btn btn-primary" onclick="ingreso()">
+                Iniciar Sesión
+            </button>
+        </div>
+
+        <div id="contenido"></div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="firebase.js"></script>
+</body>
+
+</html>

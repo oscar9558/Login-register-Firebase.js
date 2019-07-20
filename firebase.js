@@ -22,7 +22,7 @@ function registrar() {
     .then(function(){
         verficar()
     })
-
+    
     .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -35,26 +35,38 @@ function registrar() {
     //console.log(contrasena);
     console.log("se registro un usuario")
 }
+function ocultar(){
+    document.getElementById('obj1').style.display = 'none';
+    document.getElementById('obj2').style.display = 'none';
+    }
 
 function ingreso() {
-    var email2 = document.getElementById('email').value;
-    var contrasena2 = document.getElementById('contrasena').value;
-    firebase.auth().signInWithEmailAndPassword(email2, contrasena2).catch(function (error) {
+    var email2 = document.getElementById('email2').value;
+    var contrasena2 = document.getElementById('contrasena2').value;
+    firebase.auth().signInWithEmailAndPassword(email2, contrasena2)
+    .then(function(){
+        location.reload();
+        
+    })
+    .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
         // ...
-    });
+    }
+    )
+    ;
 } 
 
 function observador() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             console.log("Existe usuario activo")
-
             aparece(user);
+            signout();
+            ocultar();
             // User is signed in.
             var displayName = user.displayName;
             var email = user.email;
@@ -66,12 +78,19 @@ function observador() {
             console.log("**************");
             console.log(user);
             console.log(emailVerified);
-
+            
             // ...
         } else {
             // User is signed out.
             console.log("no existe usuario activo")
             // ...
+            contenido.innerHTML = `
+            <div class="alert alert-danger" role="alert">
+            No ha iniciado sesión!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>`;
         }
     });
 }
@@ -82,19 +101,45 @@ function aparece(user) {
     var contenido = document.getElementById('contenido');
     if(user.emailVerified){
     contenido.innerHTML = `
-    <br>
-    <div class="text-center">
-    <p> Bienvenido! </p>
-   <button class="btn btn-danger" onclick="cerrar()">Cerrar Sesión</button>
-   </div> 
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Hola ${user.email}!</strong> inicio de sesión Exitoso
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+   <div class="col-10 col-sm-6 col-lg-4 mx-auto my-3 store-item sweets" data-item="sweets">
+          <div class="card ">
+            <div class="img-container">
+              <img src="granulares.png" class="card-img-top store-img" alt="">
+              <span class="store-item-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </span>
+            </div>
+            <div class="card-body">
+              <div class="card-text d-flex justify-content-between text-capitalize">
+                <h5 id="store-item-name">Piedras y Triturados</h5>
+                <h5 class="store-item-value">$ <strong id="store-item-price" class="font-weight-bold">80000</strong>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <!-- end of card-->
+        </div>
    `;
 }
+}
+
+function signout(){
+    var contenido =document.getElementById('contenido2');
+    contenido.innerHTML=`   <button class="btn btn-outline-danger btn-sm" onclick="cerrar()">Cerrar Sesión</button>`
 }
 
 function cerrar(){
     firebase.auth().signOut()
     .then(function(){
         console.log('Saliendo...')
+        location.reload();
+
     })
     .catch(function(error){
         console.log(error) 
@@ -107,6 +152,9 @@ function verficar(){
     user.sendEmailVerification().then(function () {
             // Email sent.
             console.log("Enviando correo");
+            location.reload();
+            
+
         }).catch(function (error) {
             // An error happened.
             console.log(error);

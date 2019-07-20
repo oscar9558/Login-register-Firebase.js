@@ -13,42 +13,200 @@
     <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
     <!-- Firebase Auth Service -->
     <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="mdl.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 
 <body>
     <div class="m-3">
         <nav class="navbar navbar-dark bg-uvolco">
-            <a class="navbar-brand text-light"><img src="UvolcoLogo-09.png" alt="logo" width="120px"></a>
+            <div class="col">
+                <a class="navbar-brand text-light"><img src="UvolcoLogo-09.png" alt="logo" width="120px" class="js-tilt"
+                        data-tilt style="align-content: center"></a>
+            </div>
+            <div id="contenido2"></div>
             <div class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+                <button class="btn btn-outline-light my-2 my-sm-0 btn-sm ml-2" type="button" data-toggle="modal" id="obj1" 
+                    data-target="#loginModal">
                     Iniciar sesión
                 </button>
+                <button class="btn btn-outline-light my-2 my-sm-0 btn-sm ml-2" type="button" data-toggle="modal" id="obj2"
+                    data-target="#registerModal">
+                    Registrar
+                </button>
+            </div>
+            <div style="margin-left: 5px; color: white;">
+                <!-- Right aligned menu below button -->
+                <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="material-icons">more_vert</i>
+                </button>
+
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="demo-menu-lower-right">
+                    <li class="mdl-menu__item">Transportador</li>
+                    <li class="mdl-menu__item">Acerca de nosotros</li>
+                    <li class="mdl-menu__item">Tienda</li>
+                    <li disabled class="mdl-menu__item">Mi perfil</li>
+                    <li class="mdl-menu__item">Contáctanos</li>
+                </ul>
             </div>
         </nav>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade " id="registerModal" tabindex="-1" role="dialog" aria-labelledby="loginTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered custom-bg col" role="document">
+            <div class="os-2" style="background: white">
+                <div class="modal-content mc os-1 os-2">
+                    <div class="row">
+                        <button type="button" class="close" style="padding: 1% 0 0 95%" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div style="margin: 2% 5% 10% 0;">
+
+                            <div class="modal-body" style="padding-right: 55%">
+                                <div class="os-1 s-1">
+                                    <div class="os-1 s-1" style="margin:0 15% 0 15%">
+                                        <img src="UvolcoLogo2-09.png" alt="logo" width="100%" class="js-tilt" data-tilt
+                                            style="align-content: center" />
+                                    </div>
+                                    <div class="text-center s-1 os-1">
+                                        <h3 class="modal-title s-1 mp-5 tt-1" id="loginTitle">
+                                            Registro de Usuario
+                                        </h3>
+
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="email" id="email">
+                                            <label class="mdl-textfield__label" for="email">Ingresa tu email</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="password" id="contrasena">
+                                            <label class="mdl-textfield__label" for="contrasena">Ingresa tu
+                                                contraseña</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="os-1 text-center">
+                                    <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-dismiss="modal">
+                                        Cerrar
+                                    </button>
+                                    <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="registrar()">
+                                        Registrarse
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade " id="loginModal" tabindex="-1" role="dialog" aria-labelledby="registerTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered custom-bg col" role="document">
+            <div class="os-2" style="background: white">
+                <div class="modal-content mc-1 os-1 os-2">
+                    <div class="row">
+                        <button type="button" class="close" style="padding: 1% 0 0 95%" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div style="margin: 2% 5% 10% 0;">
+
+                            <div class="modal-body" style="padding-left: 55%">
+                                <div class="os-1 s-1">
+                                    <div class="os-1 s-1" style="margin:0 15% 0 15%">
+                                        <img src="UvolcoLogo2-09.png" alt="logo" width="100%" class="js-tilt" data-tilt
+                                            style="align-content: center" />
+                                    </div>
+                                    <div class="text-center s-1 os-1">
+                                        <h3 class="modal-title s-1 mp-5 tt-1" id="registerTitle">
+                                            Iniciar Sesión
+                                        </h3>
+
+                                        <!-- <input class="s-2" id="name" type="text" placeholder="Ingresa tu Nombre" />-->
+
+
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="email" id="email2">
+                                            <label class="mdl-textfield__label" for="email2">Ingresa tu email</label>
+                                        </div>
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="password" id="contrasena2">
+                                            <label class="mdl-textfield__label" for="contrasena2">Ingresa tu
+                                                contraseña</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="os-1 text-center">
+                                    <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" data-dismiss="modal">
+                                        Cerrar
+                                    </button>
+
+
+                                    <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="ingreso()">
+                                        Iniciar Sesión
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Textfield with Floating Label -->
+
+
+
+    <!-- Modal -->
+
     <section class="s-3">
-        <div class="col text-center s-1">
-            <h3 class="text-uppercase">Registro de Usuarios</h3>
-            <input class="s-2" id="name" type="text" placeholder="Ingresa tu Nombre" />
-            <input class="s-2" id="email" type="email" placeholder="Ingresa Email" />
-            <input class="s-2" id="contrasena" type="password" placeholder="Ingresa Contraseña" />
-            <br />
-            <button class="btn btn-danger" onclick="registrar()">Registrarse</button>
-        </div>
-
-        <div class="col text-center s-1">
-            <h3 class="text-uppercase">Ingreso de Usuarios</h3>
-            <input class="s-2" id="email2" type="email" placeholder="Ingresa Email" />
-            <input class="s-2" id="contrasena2" type="password" placeholder="Ingresa Contraseña" />
-            <br />
-            <button class="btn btn-primary" onclick="ingreso()">
-                Iniciar Sesión
-            </button>
-        </div>
-
         <div id="contenido"></div>
+
+        <input id="tt1" type="button" value="Actualizar" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="location.reload()" />
+        <input id="tt1" type="button" value="Actualizar" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onclick="location.reload()" />
+        <div class="mdl-tooltip" data-mdl-for="tt1">
+                Reload
+            </div>
+        <!-- Simple Tooltip -->
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                <thead>
+                  <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Material</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Recebo</td>
+                    <td>25</td>
+                    <td>$290000</td>
+                  </tr>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Arena</td>
+                    <td>50</td>
+                    <td>$125000</td>
+                  </tr>
+                  <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Gravilla</td>
+                    <td>10</td>
+                    <td>$235000</td>
+                  </tr>
+                </tbody>
+              </table>
+        
     </section>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -59,6 +217,14 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="firebase.js"></script>
+
+
+    <script src="tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.2
+        })
+    </script>
 </body>
 
 </html>
